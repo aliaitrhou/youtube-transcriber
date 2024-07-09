@@ -1,7 +1,7 @@
-### requirment
+### Requirment
   - Python and pip
     - pysrt - Python parser for SubRip (srt) files
-    -  yt-dlp - A youtube-dl fork with additional features and fixes
+    - yt-dlp - A youtube-dl fork with additional features and fixes
    
 # Stack i used:
   #### Stitches:
