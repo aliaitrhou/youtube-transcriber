@@ -5,8 +5,8 @@
     - openai - The OpenAI Python library provides convenient access to the OpenAI API from applications written in the Python language
     Next.js
 
-## Used Stack:
-### Stitches 
+# Used Stack:
+#### Stitches 
 - [Stitches](https://stitches.dev/) - CSS-in-JS Library
 ### next Js
 - [framework](https://nextjs.org/) for react
