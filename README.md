@@ -6,7 +6,7 @@
 ## radix-ui
 - [ui library](https://www.radix-ui.com/)
 ## whisper
-- [openai whisper](https://github.com/openai/whisper)(open source)
+- [openai whisper](https://github.com/openai/whisper) (open source)
 ## hugging-face
 - [translatino model](https://huggingface.co/) from hugging face
 ### vercel
