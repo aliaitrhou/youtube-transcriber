@@ -1,8 +1,3 @@
-### Requirment
-  - Python and pip
-    - pysrt - Python parser for SubRip (srt) files
-    - yt-dlp - A youtube-dl fork with additional features and fixes
-   
 # Stack i used:
   #### Stitches:
   - [Stitches](https://stitches.dev/) - CSS-in-JS Library
@@ -16,3 +11,7 @@
   - [Hugging-face](https://huggingface.co/) translation model
   #### vercel:
   - to Deploy to internet, click [here](https://yt-amber-ten.vercel.app/)
+## Requirment
+  - Python and pip
+    - pysrt - Python parser for SubRip (srt) files
+    - yt-dlp - A youtube-dl fork with additional features and fixes
