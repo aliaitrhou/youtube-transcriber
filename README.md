@@ -19,5 +19,7 @@
 
 
 
-https://github.com/aliaitrhou/yt-transcriber/assets/146731444/dee15c68-831d-41df-abb7-bbba3ec79c73
+
+
+https://github.com/aliaitrhou/yt-transcriber/assets/146731444/3e9cd525-1d4e-46b3-ab07-21c0dda128bc
 
