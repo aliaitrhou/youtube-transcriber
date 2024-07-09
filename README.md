@@ -10,7 +10,7 @@
   #### hugging-face:
   - [Hugging-face](https://huggingface.co/) translation model
   #### vercel:
-  - to Deploy to internet, click [here](https://yt-amber-ten.vercel.app/)
+  - Project deployed to internet using Vercel, click [here](https://yt-amber-ten.vercel.app/)
 ## Requirment
   - Python and pip
     - pysrt - Python parser for SubRip (srt) files
