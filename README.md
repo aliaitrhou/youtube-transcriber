@@ -1,6 +1,6 @@
 # Used Stack:
 ## Stitches 
-- [css-in-js](https://stitches.dev/) library
+-- [css-in-js](https://stitches.dev/) library
 ## next Js
 - [framework](https://nextjs.org/) for react
 ## radix-ui
