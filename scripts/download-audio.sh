@@ -1,6 +1,4 @@
 #!/bin/bash
-# Download yt-dlp
-pip3 install yt-dlp
 
 VIDEIO_ID=$1
 
