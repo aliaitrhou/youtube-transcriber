@@ -6,7 +6,7 @@
   #### radix-ui:
   - [Radix UI](https://www.radix-ui.com/) - Unstyled, accessible components for building high‑quality design systems and web apps in React.
   #### whisper:
-  - openai (open source) [Whisper](https://github.com/openai/whisper) a general-purpose speech recognition mode.
+  - openai (open source) [Whisper](https://github.com/openai/whisper) a general-purpose speech recognition model.
   #### hugging-face:
   - [Hugging-face](https://huggingface.co/) translation model
   #### vercel:
