@@ -15,3 +15,9 @@
   - Python and pip
     - pysrt - Python parser for SubRip (srt) files
     - yt-dlp - A youtube-dl fork with additional features and fixes
+## Quick overview:
+
+
+
+https://github.com/aliaitrhou/yt-transcriber/assets/146731444/dee15c68-831d-41df-abb7-bbba3ec79c73
+
