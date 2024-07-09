@@ -1,4 +1,4 @@
-# Stack i used:
+# Stack i used :
   #### Stitches:
   - [Stitches](https://stitches.dev/) - CSS-in-JS Library
   #### next Js:
