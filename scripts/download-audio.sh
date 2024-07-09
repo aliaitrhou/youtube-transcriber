@@ -1,9 +1,6 @@
 #!/bin/bash
 # Download yt-dlp
-wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O ./yt-dlp
-
-# Make it executable
-chmod +x ./yt-dlp
+pip3 install yt-dlp
 
 VIDEIO_ID=$1
 
