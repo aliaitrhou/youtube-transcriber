@@ -8,11 +8,13 @@ audio_file_path = os.path.join(os.getcwd(), 'tmp', video_id + '.m4a')
 print(audio_file_path)
 text = model.transcribe(audio_file_path)
 
-# this function to convert the plain text to SRT like format.
+# this function is just a way to convert the plain text to SRT like format.
+
+
 def text_to_srt(transcription):
     subtitles = []
     words_per_line = 40
-    chars_per_second = 50  
+    chars_per_second = 50
     paragraphs = transcription.strip().split("\n")
     lines = []
     for paragraph in paragraphs:
@@ -29,9 +31,8 @@ def text_to_srt(transcription):
             start_time = f"00:00:{current_time:02d},000"
             end_time = f"00:00:{current_time + duration_seconds:.3f}"
             subtitle = f"{
-                len(subtitles) + 1}\n{start_time} --> {end_time}\n{wrapped_line}\n\n"
+                len(subtitles) + 1}\n{start_time} --> {end_time}\n{wrapped_line}\n"
             subtitles.append(subtitle)
-
             current_time += duration_seconds
 
     return "".join(subtitles)

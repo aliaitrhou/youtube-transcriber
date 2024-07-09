@@ -1,14 +1,12 @@
 from transformers import MarianMTModel, MarianTokenizer
-import os
 import sys
 import pysrt
 
 input_data = sys.stdin.read()
 subs = pysrt.from_string(input_data)
-
-# if you wanna use Hugging-face 
-# Choose the model and tokenizer
+# if you wanna use Hugging-face (free)
 model_name = "Helsinki-NLP/opus-mt-en-ar"
+
 
 def translate_text(text):
     tokenizer = MarianTokenizer.from_pretrained(
