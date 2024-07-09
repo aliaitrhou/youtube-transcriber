@@ -1,3 +1,4 @@
-openai
-yt-dlp
+whisper
 pysrt
+transformers
+yt-dlp
