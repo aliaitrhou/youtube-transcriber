@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "type": "module",
     "build": "next build",
     "dev": "next dev",
     "start": "next start"
@@ -19,6 +20,7 @@
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
+    "init": "^0.1.2",
     "prettier": "^3.3.2",
     "typescript": "^4.7.4"
   }
