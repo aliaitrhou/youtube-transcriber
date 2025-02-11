@@ -1,5 +1,0 @@
-yt-dlp
-whisper
-pysrt
-transformers
-
