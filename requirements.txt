@@ -2,5 +2,6 @@ yt-dlp
 openai
 transformers
 pysrt
+ffmpeg-python
 textwrap
 whisper
