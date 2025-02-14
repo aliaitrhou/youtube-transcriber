@@ -6,7 +6,7 @@ VIDEIO_ID=$1
 
 mkdir -p ./tmp
 
-yt-dlp "https://youtube.com/watch?v=$VIDEO_ID" --format m4a -o "./tmp/%(id)s.%(ext)s" --cookies-from-browser chrome 2>&1
+yt-dlp "https://youtube.com/watch?v=$VIDEO_ID" --format m4a -o "./tmp/%(id)s.%(ext)s" --cookies cookies.txt 2>&1
 
 # Check if the download was successful
 if [ $? -ne 0 ]; then
