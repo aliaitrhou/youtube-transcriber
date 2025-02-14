@@ -64,8 +64,6 @@ export default function Home() {
     if (typeof videoId === 'string') {
       setResultTranscript('');
       setProcessing(true);
-      // bN08lzkLCVo
-      // https://www.youtube.com/watch?v=bN08lzkLCVo
       const transcriptInArabic = await processVideo(videoId, message => {
         setProgressOutput(prev => prev + message);
       });
