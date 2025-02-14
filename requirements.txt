@@ -1,0 +1,6 @@
+yt-dlp
+openai
+transformers
+pysrt
+textwrap
+whisper
