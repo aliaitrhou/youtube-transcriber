@@ -30,8 +30,7 @@ def text_to_srt(transcription):
 
             start_time = f"00:00:{current_time:02d},000"
             end_time = f"00:00:{current_time + duration_seconds:.3f}"
-            subtitle = f"{
-                len(subtitles) + 1}\n{start_time} --> {end_time}\n{wrapped_line}\n"
+            subtitle = f" {start_time} --> {end_time}\n{wrapped_line}\n"
             subtitles.append(subtitle)
             current_time += duration_seconds
 
