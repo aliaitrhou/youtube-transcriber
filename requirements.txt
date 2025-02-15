@@ -3,4 +3,4 @@ openai
 together
 transformers
 pysrt
-dotenv
+python-dotenv
