@@ -6,4 +6,4 @@ VIDEO_ID=$1
 
 yt-dlp "https://www.youtube.com/watch?v=$VIDEO_ID" \
   --format m4a -o "./tmp/%(id)s.%(ext)s" \
-  --cookies cookies.txt --verbose 2>&1
+  --cookies ../cookies.txt --verbose 2>&1
