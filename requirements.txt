@@ -1,6 +1,6 @@
 yt-dlp
 openai
+together
 transformers
 pysrt
-ffmpeg-python
-whisper
+dotenv
