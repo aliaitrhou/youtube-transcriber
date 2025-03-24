@@ -6,7 +6,7 @@ export default function MyDocument() {
     <Html lang="en">
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Sora:wght@400;700&display=swap"
           rel="stylesheet"
         />
         <style
