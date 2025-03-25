@@ -1,56 +1,10 @@
-import { TabsContent } from '@radix-ui/react-tabs';
-import Head from 'next/head';
-import { Box } from '../components/box';
-import { Output } from '../components/output';
-import { TabsRoot, TabsList, TabsTrigger } from '../components/tabs';
 import { VideoForm } from '../components/video-form';
-import { styled } from '../stitches.config';
+import Head from 'next/head';
 import React, { useState } from 'react';
 import { extractVideoIdFromUrl, processVideo } from '../utils/api-client';
 import Footer from '../components/footer';
-
-const Text = styled('p', {
-  fontFamily: '$inco',
-  color: '$hiContrast',
-  textAlign: 'center',
-  // '@initial': {
-  //   fontSize: '0.3em'
-  // },
-  '@bp1': {
-    fontSize: '1.7em'
-  },
-
-  '@bp2': {
-    fontSize: '2.2em'
-  },
-  '@bp3': {
-    fontSize: '2.7em'
-  }
-});
-
-const Container = styled('div', {
-  display: 'flex',
-  fontFamily: 'Inconsolata',
-  flexDirection: 'column',
-  height: '100dvh',
-  marginY: 0,
-  marginX: 'auto',
-  paddingX: '$3',
-  paddingY: 0,
-  variants: {
-    size: {
-      1: {
-        maxWidth: '300px'
-      },
-      2: {
-        maxWidth: '585px'
-      },
-      3: {
-        maxWidth: '865px'
-      }
-    }
-  }
-});
+import { Container, Heading, Stack, Text, VStack } from '@chakra-ui/react';
+import Tabs from '../components/tabs';
 
 export default function Home() {
   const [isProcessing, setProcessing] = useState(false);
@@ -64,6 +18,8 @@ export default function Home() {
     if (typeof videoId === 'string') {
       setResultTranscript('');
       setProcessing(true);
+      // bN08lzkLCVo
+      // https://www.youtube.com/watch?v=bN08lzkLCVo
       const transcriptInArabic = await processVideo(videoId, message => {
         setProgressOutput(prev => prev + message);
       });
@@ -78,31 +34,42 @@ export default function Home() {
   };
 
   return (
-    <Box css={{ paddingY: '$6' }}>
-      <Head>
-        <title>Youtube Transcription &amp; Arabic Translation </title>
-      </Head>
-      <Container size={{ '@initial': '1', '@bp1': '2' }}>
-        <Text as="h1">Youtube Transcribe &amp; Arabic Translation AI tool</Text>
-        <VideoForm
-          styles={{ marginTop: 0 }}
-          isProcessing={isProcessing}
-          onSubmit={handleStartProcessing}
-        />
-        <TabsRoot value={activeTab} onValueChange={setActiveTab}>
-          <TabsList aria-label="Output">
-            <TabsTrigger value="progress">Progress</TabsTrigger>
-            <TabsTrigger value="result">Result</TabsTrigger>
-          </TabsList>
-          <TabsContent value="progress">
-            <Output>{progressOutput}</Output>
-          </TabsContent>
-          <TabsContent value="result">
-            <Output>{resultTranscript}</Output>
-          </TabsContent>
-        </TabsRoot>
+    <Container h={'100dvh'} maxW={'4xl'} p={[2, 4, 6]} gap={0} bg="tomato.400">
+      <Stack h={'full'} justifyContent={'center'} alignItems={'center'}>
+        <Head>
+          <title>Translate any video to any language within Seconds!</title>
+        </Head>
+        <Stack
+          fontFamily={'Inconsolata'}
+          marginY={0}
+          marginX="auto"
+          paddingX={3}
+        >
+          <Heading
+            as="h1"
+            fontFamily={'sora'}
+            color="red.500"
+            textAlign={'center'}
+            fontSize={['1.7em', '2.2em', '3em']}
+            lineHeight={'shorter'}
+            mb={6}
+          >
+            Translate & Trascript any video to any language within Seconds!
+          </Heading>
+          <VideoForm
+            styles={{ marginTop: 0 }}
+            isProcessing={isProcessing}
+            onSubmit={handleStartProcessing}
+          />
+          <Tabs
+            activeTab={activeTab}
+            onValueChange={(v: string) => setActiveTab(v)}
+            progressOutput={progressOutput}
+            resultOutput={resultTranscript}
+          />
+        </Stack>
         <Footer />
-      </Container>
-    </Box>
+      </Stack>
+    </Container>
   );
 }
