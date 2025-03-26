@@ -21,13 +21,10 @@ export const Output: React.FC<Props> = ({ children }) => {
       ref={refBox}
       flex={2}
       overflow="auto"
-      minHeight={350}
-      maxHeight={350}
-      paddingTop={'.2em'}
-      padding={'.5em'}
-      borderXWidth={1}
-      borderBottomWidth={1}
-      borderColor={'red.400'}
+      minHeight={400}
+      maxHeight={400}
+      padding={4}
+      paddingTop={2}
       _active={{
         outline: 'none'
       }}
@@ -38,8 +35,9 @@ export const Output: React.FC<Props> = ({ children }) => {
       <Box
         as="pre"
         fontFamily={'Inconsolata'}
-        color={'gray.700'}
-        fontSize={'1em'}
+        color={'green.600/90'}
+        fontWeight={'semibold'}
+        fontSize={14}
         whiteSpace={'pre-wrap'}
         lineHeight={'shorter'}
       >

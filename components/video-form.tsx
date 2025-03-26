@@ -1,129 +1,112 @@
-import React from 'react';
-import * as Form from '@radix-ui/react-form';
-import { styled } from '@stitches/react';
+import React, { ChangeEvent, useState } from 'react';
+import { Button, Field, HStack, Input, NativeSelect } from '@chakra-ui/react';
+import { I18NProvider } from 'next/dist/server/lib/i18n-provider';
 
 type Props = {
-  onSubmit: (videoUrl: string) => void;
+  onSubmit: (videoUrl: string, lang: string) => void;
   isProcessing: boolean;
-  styles: {};
 };
 
-export const VideoForm: React.FC<Props> = ({
-  onSubmit,
-  isProcessing,
-  styles
-}) => {
+const getLanguages = () => {
+  const languages: object[] = [];
+  const supportedLanguages = new Intl.DisplayNames(['en'], {
+    type: 'language'
+  });
+  const languageCodes = [
+    'ar',
+    'en',
+    'es',
+    'fr',
+    'de',
+    'zh',
+    'it',
+    'ja',
+    'ko',
+    'pt',
+    'ru',
+    'hi',
+    'bn',
+    'pa',
+    'ja',
+    'ml'
+  ];
+
+  languageCodes.forEach(code => {
+    languages.push({ code, name: supportedLanguages.of(code) });
+  });
+
+  return languages;
+};
+
+const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
+  const [language, setLanguage] = useState('');
+
+  const handleSelectElementChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target as HTMLSelectElement;
+    setLanguage(value);
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
     const videoUrl = (e.target as HTMLFormElement | undefined)?.videoUrl
       ?.value as string;
-    onSubmit(videoUrl);
+
+    if (videoUrl && language) {
+      onSubmit(videoUrl, language);
+    } else {
+      if (!videoUrl) alert('You must provide a video URL!');
+      if (!language) alert('You must select Language!');
+    }
   };
+
+  const langs = getLanguages();
+
   return (
-    <FormRoot onSubmit={handleSubmit} css={styles}>
-      <FormField name="videoUrl">
-        <Flex css={{ alignItems: 'baseline', justifyContent: 'space-between' }}>
-          <FormLabel css={{ color: 'black' }}>Video URL</FormLabel>
-          <FormMessage match="valueMissing">
-            Please enter a video URL
-          </FormMessage>
-          <FormMessage match="typeMismatch">
-            Please provide a valid URL
-          </FormMessage>
-        </Flex>
-        <Form.Control asChild>
-          <Input
-            type="text"
-            name="videoUrl"
-            required
-            placeholder="https://youtube.com/watch?v="
-          />
-        </Form.Control>
-      </FormField>
-      <Form.Submit asChild>
-        <Button css={{ marginTop: 10 }} disabled={isProcessing}>
-          {isProcessing ? 'Processing...' : 'Start processing'}
-        </Button>
-      </Form.Submit>
-    </FormRoot>
+    <form onSubmit={handleSubmit}>
+      <Field.Root>
+        <Field.Label mb={-1}>Video URL</Field.Label>
+        <Input
+          rounded={'none'}
+          borderWidth={1}
+          borderColor={'black'}
+          name="videoUrl"
+          placeholder="https://youtube.com/watch?v="
+        />
+        <HStack w={'full'}>
+          <NativeSelect.Root w={'1/2'}>
+            <NativeSelect.Field
+              rounded={'none'}
+              borderWidth={1}
+              borderColor={'black'}
+              onChange={handleSelectElementChange}
+            >
+              {langs.map((lang: any) => (
+                <option key={lang.code} value={lang.name}>
+                  {lang.name}
+                </option>
+              ))}
+            </NativeSelect.Field>
+            <NativeSelect.Indicator />
+          </NativeSelect.Root>
+          <Button
+            type="submit"
+            w={'1/2'}
+            rounded="none"
+            bg={'red.500'}
+            _hover={{
+              bg: 'red.500/90'
+            }}
+            borderWidth={1}
+            borderColor={'black'}
+            fontFamily={'sora'}
+            fontSize={13}
+          >
+            Start Processing
+          </Button>
+        </HStack>
+      </Field.Root>
+    </form>
   );
 };
 
-const FormRoot = styled(Form.Root, {
-  fontFamily: 'inconsolata, sans-serif'
-  // src: "url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap')"
-});
-
-const FormField = styled(Form.Field, {
-  display: 'grid',
-  marginBottom: 10
-});
-
-const FormLabel = styled(Form.Label, {
-  fontSize: 15,
-  fontWeight: 500,
-  lineHeight: '35px',
-  color: ''
-});
-
-const FormMessage = styled(Form.Message, {
-  fontSize: 13,
-  color: 'tomato',
-  opacity: 0.8
-});
-
-const Flex = styled('div', { display: 'flex' });
-
-const inputStyles = {
-  all: 'unset',
-  boxSizing: 'border-box',
-  width: '100%',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderTopRightRadius: 4,
-  borderTopLeftRadius: 4,
-
-  fontSize: 15,
-  color: '$foreground',
-  backgroundColor: '$red200',
-  boxShadow: '0 0 0 2px tomato',
-  '&:not(:disabled):hover': { boxShadow: `0 0 0 1px black` },
-  '&:not(:disabled):focus': { boxShadow: `0 0 0 2px black` }
-  // boxShadow: `0 0 0 1px $gray600`,
-  // '&:hover': { boxShadow: `0 0 0 1px $gray600` },
-  // '&:focus': { boxShadow: `0 0 0 2px $purple600` },
-  // '&::selection': { backgroundColor: '$gray600', color: 'white' }
-};
-
-const Input = styled('input', {
-  ...inputStyles,
-  height: 35,
-  textIndent: 4,
-  lineHeight: 1,
-  padding: '0 10px'
-});
-
-const Button = styled('button', {
-  all: 'unset',
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: 4,
-  padding: '0 15px',
-  fontSize: 15,
-  lineHeight: 1,
-  fontWeight: 500,
-  height: 35,
-  width: '100%',
-
-  '&:disabled': {
-    opacity: 0.5
-  },
-  backgroundColor: '$red600',
-  color: 'white',
-  boxShadow: `0 2px 10px $red400`,
-  '&:not(:disabled):hover': { backgroundColor: '$red500' },
-  '&:not(:disabled):focus': { boxShadow: `0 0 0 1px black` }
-});
+export default VideoForm;

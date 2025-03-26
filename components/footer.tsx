@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
     >
       © {currentYear} by {'   '}
       <Link
-        href="https://x.com/AliRhou17481"
+        href="https://aliaitrahou.me"
         color="tomato"
         style={{ textDecoration: 'none' }}
         target="_blankhttps://scribehow.com/scribe-ai"
