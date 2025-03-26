@@ -31,6 +31,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# yarn
+.yarn
+
 # vercel
 .vercel
 
@@ -38,4 +41,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 cookies.txt
-.yarn

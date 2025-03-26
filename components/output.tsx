@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { styled } from '@stitches/react';
-import { Box } from './box';
+import { Box } from '@chakra-ui/react';
 
 type Props = {
   children: string | undefined;
@@ -12,6 +11,7 @@ export const Output: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     const elBox = refBox.current;
     if (elBox) {
+      // scroll to bottom
       elBox.scrollTop = elBox.scrollHeight;
     }
   }, [children]);
@@ -19,26 +19,30 @@ export const Output: React.FC<Props> = ({ children }) => {
   return (
     <Box
       ref={refBox}
-      css={{
-        flex: 1,
-        overflow: 'auto',
-        minHeight: 300,
-        maxHeight: 300,
-        borderBottom: '.01px gray solid', // Ensure commas separate each property
-        borderRight: '.01px gray solid',
-        borderLeft: '.01px gray solid',
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10
+      flex={2}
+      overflow="auto"
+      minHeight={400}
+      maxHeight={400}
+      padding={4}
+      paddingTop={2}
+      _active={{
+        outline: 'none'
       }}
-      className="output-container"
+      _focus={{
+        outline: 'none'
+      }}
     >
-      <Pre>{children}</Pre>
+      <Box
+        as="pre"
+        fontFamily={'Inconsolata'}
+        color={'green.600/90'}
+        fontWeight={'semibold'}
+        fontSize={14}
+        whiteSpace={'pre-wrap'}
+        lineHeight={'shorter'}
+      >
+        {children}
+      </Box>
     </Box>
   );
 };
-
-export const Pre = styled('pre', {
-  margin: '1em',
-  fontSize: '1.2em',
-  whiteSpace: 'pre-wrap'
-});

@@ -1,48 +1,72 @@
-import * as Tabs from '@radix-ui/react-tabs';
-import { styled } from '@stitches/react';
+import React, { useState } from 'react';
+import { Tabs } from '@chakra-ui/react';
+import { Output } from './output';
 
-export const TabsRoot = styled(Tabs.Root, {
-  display: 'flex',
-  flexDirection: 'column',
-  marginTop: '1.5em'
-});
+interface Props {
+  activeTab: string;
+  onValueChange: (newValue: string) => void;
+  progressOutput: string;
+  resultOutput: string;
+}
 
-export const TabsList = styled(Tabs.List, {
-  flexShrink: 0,
-  display: 'flex',
-  borderBottom: `1px solid $gray400`
-});
+const TabsUI: React.FC<Props> = ({
+  activeTab,
+  progressOutput,
+  onValueChange,
+  resultOutput
+}) => {
+  return (
+    <Tabs.Root
+      defaultValue={activeTab}
+      px={'lg'}
+      fontFamily={'sora'}
+      onValueChange={(e: { value: string }) => onValueChange(e.value)}
+      borderWidth={1}
+      borderColor={'black'}
+    >
+      <Tabs.List gap={0}>
+        <Tabs.Trigger
+          bg={'white'}
+          w={'50%'}
+          value="progress"
+          textAlign={'center'}
+          borderRightWidth={1}
+          borderBottomWidth={0.8}
+          borderColor={'black'}
+          color="gray.500"
+          _selected={{
+            color: 'black',
+            borderBottomWidth: 2,
+            borderBottomColor: 'black'
+          }}
+        >
+          Progress
+        </Tabs.Trigger>
+        <Tabs.Trigger
+          bg={'white'}
+          w={'50%'}
+          value="result"
+          borderRightWidth={0.8}
+          borderBottomWidth={0.8}
+          borderColor={'black'}
+          color="gray.500"
+          _selected={{
+            color: 'black',
+            borderBottomWidth: 2,
+            borderBottomColor: 'black'
+          }}
+        >
+          Result
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content p={0} value="progress">
+        <Output>{progressOutput}</Output>
+      </Tabs.Content>
+      <Tabs.Content p={0} value="result">
+        <Output>{resultOutput}</Output>
+      </Tabs.Content>
+    </Tabs.Root>
+  );
+};
 
-export const TabsTrigger = styled(Tabs.Trigger, {
-  all: 'unset',
-  fontFamily: 'inherit',
-  backgroundColor: 'white',
-  height: 45,
-  flex: 1,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 15,
-  lineHeight: 1,
-  color: '$foreground',
-  userSelect: 'none',
-  '&:first-child': { borderTopLeftRadius: 6 },
-  '&:last-child': { borderTopRightRadius: 6 },
-  '&:hover': { color: '$red600' },
-  '&[data-state="active"]': {
-    color: '$red600',
-    boxShadow: 'inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor'
-  }
-});
-
-export const TabsContent = styled(Tabs.Content, {
-  display: 'flex',
-  flexDirection: 'column',
-  minheight: 400,
-  flexGrow: 1,
-  paddingTop: 1,
-  backgroundColor: 'white',
-  borderBottomLeftRadius: 6,
-  borderBottomRightRadius: 6,
-  outline: 'none'
-});
+export default TabsUI;
