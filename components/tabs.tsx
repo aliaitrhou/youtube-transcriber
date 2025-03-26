@@ -18,11 +18,11 @@ const TabsUI: React.FC<Props> = ({
   return (
     <Tabs.Root
       defaultValue={activeTab}
-      variant="outline"
       px={'lg'}
-      bg={'#ff000009'}
       fontFamily={'sora'}
       onValueChange={(e: { value: string }) => onValueChange(e.value)}
+      borderWidth={1}
+      borderColor={'black'}
     >
       <Tabs.List gap={0}>
         <Tabs.Trigger
@@ -30,16 +30,14 @@ const TabsUI: React.FC<Props> = ({
           w={'50%'}
           value="progress"
           textAlign={'center'}
-          borderWidth={1}
-          color={'gray.500'}
-          borderBottomColor={'red.400'}
-          mr="1px"
+          borderRightWidth={1}
+          borderBottomWidth={0.8}
+          borderColor={'black'}
+          color="gray.500"
           _selected={{
-            borderWidth: 1,
-            color: 'gray.700',
-            borderBottom: 'none',
-            borderRightRadius: 'none',
-            borderColor: 'red.400'
+            color: 'black',
+            borderBottomWidth: 2,
+            borderBottomColor: 'black'
           }}
         >
           Progress
@@ -48,15 +46,14 @@ const TabsUI: React.FC<Props> = ({
           bg={'white'}
           w={'50%'}
           value="result"
-          borderWidth={1}
-          color={'gray.500'}
-          borderBottomColor={'red.400'}
+          borderRightWidth={0.8}
+          borderBottomWidth={0.8}
+          borderColor={'black'}
+          color="gray.500"
           _selected={{
-            borderWidth: 1,
-            color: 'gray.700',
-            borderBottom: 'none',
-            borderLeftRadius: 'none',
-            borderColor: 'red.400'
+            color: 'black',
+            borderBottomWidth: 2,
+            borderBottomColor: 'black'
           }}
         >
           Result

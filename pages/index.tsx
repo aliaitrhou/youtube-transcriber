@@ -1,9 +1,9 @@
-import { VideoForm } from '../components/video-form';
+import VideoForm from '../components/video-form';
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { extractVideoIdFromUrl, processVideo } from '../utils/api-client';
 import Footer from '../components/footer';
-import { Container, Heading, Stack, Text, VStack } from '@chakra-ui/react';
+import { Container, Heading, Stack } from '@chakra-ui/react';
 import Tabs from '../components/tabs';
 
 export default function Home() {
@@ -12,14 +12,12 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('progress');
   const [resultTranscript, setResultTranscript] = useState('');
 
-  const handleStartProcessing = async (videoUrl: string) => {
+  const handleStartProcessing = async (videoUrl: string, language: string) => {
     const videoId = extractVideoIdFromUrl(videoUrl);
-    console.log('videoId:', videoId);
+
     if (typeof videoId === 'string') {
       setResultTranscript('');
       setProcessing(true);
-      // bN08lzkLCVo
-      // https://www.youtube.com/watch?v=bN08lzkLCVo
       const transcriptInArabic = await processVideo(videoId, message => {
         setProgressOutput(prev => prev + message);
       });
@@ -35,11 +33,12 @@ export default function Home() {
 
   return (
     <Container h={'100dvh'} maxW={'4xl'} p={[2, 4, 6]} gap={0} bg="tomato.400">
+      <Head>
+        <title></title>
+      </Head>
       <Stack h={'full'} justifyContent={'center'} alignItems={'center'}>
-        <Head>
-          <title>Translate any video to any language within Seconds!</title>
-        </Head>
         <Stack
+          w={'full'}
           fontFamily={'Inconsolata'}
           marginY={0}
           marginX="auto"
@@ -47,17 +46,18 @@ export default function Home() {
         >
           <Heading
             as="h1"
+            maxW={'2xl'}
+            mx={'auto'}
             fontFamily={'sora'}
             color="red.500"
             textAlign={'center'}
-            fontSize={['1.7em', '2.2em', '3em']}
-            lineHeight={'shorter'}
+            fontSize={[24, 28, 35]}
+            lineHeight={1.1}
             mb={6}
           >
             Translate & Trascript any video to any language within Seconds!
           </Heading>
           <VideoForm
-            styles={{ marginTop: 0 }}
             isProcessing={isProcessing}
             onSubmit={handleStartProcessing}
           />
