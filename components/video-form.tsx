@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Button, Field, HStack, Input, NativeSelect } from '@chakra-ui/react';
-import { I18NProvider } from 'next/dist/server/lib/i18n-provider';
 
 type Props = {
   onSubmit: (videoUrl: string, lang: string) => void;
@@ -40,6 +39,7 @@ const getLanguages = () => {
 
 const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
   const [language, setLanguage] = useState('');
+  const [missingData, setMissingData] = useState('');
 
   const handleSelectElementChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target as HTMLSelectElement;
@@ -54,8 +54,8 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
     if (videoUrl && language) {
       onSubmit(videoUrl, language);
     } else {
-      if (!videoUrl) alert('You must provide a video URL!');
-      if (!language) alert('You must select Language!');
+      if (!videoUrl) setMissingData('Missing video URL!');
+      if (!language) setMissingData('Missing Language!');
     }
   };
 
@@ -64,7 +64,10 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field.Root>
-        <Field.Label mb={-1}>Video URL</Field.Label>
+        <Field.Label mb={-1} fontSize={['xs', 'sm']}>
+          Video URL
+        </Field.Label>
+        <Field.ErrorText>{missingData && <>missingData</>}</Field.ErrorText>
         <Input
           rounded={'none'}
           borderWidth={1}
@@ -80,6 +83,9 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
               borderColor={'black'}
               onChange={handleSelectElementChange}
             >
+              <option selected disabled>
+                Language
+              </option>
               {langs.map((lang: any) => (
                 <option key={lang.code} value={lang.name}>
                   {lang.name}
@@ -101,7 +107,7 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
             fontFamily={'sora'}
             fontSize={13}
           >
-            Start Processing
+            {isProcessing ? 'Processing...' : 'Start Processing'}
           </Button>
         </HStack>
       </Field.Root>

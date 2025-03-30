@@ -25,18 +25,18 @@ export const Output: React.FC<Props> = ({ children }) => {
       maxHeight={400}
       padding={4}
       paddingTop={2}
-      _active={{
-        outline: 'none'
-      }}
       _focus={{
         outline: 'none'
       }}
+      borderWidth={1}
+      borderColor={'black'}
+      borderTop={'none'}
     >
       <Box
         as="pre"
         fontFamily={'Inconsolata'}
-        color={'green.600/90'}
-        fontWeight={'semibold'}
+        color={'black'}
+        fontWeight={'bold'}
         fontSize={14}
         whiteSpace={'pre-wrap'}
         lineHeight={'shorter'}

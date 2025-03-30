@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tabs } from '@chakra-ui/react';
 import { Output } from './output';
 
@@ -18,26 +18,29 @@ const TabsUI: React.FC<Props> = ({
   return (
     <Tabs.Root
       defaultValue={activeTab}
+      variant={'outline'}
       px={'lg'}
       fontFamily={'sora'}
       onValueChange={(e: { value: string }) => onValueChange(e.value)}
-      borderWidth={1}
-      borderColor={'black'}
     >
-      <Tabs.List gap={0}>
+      <Tabs.List>
         <Tabs.Trigger
           bg={'white'}
           w={'50%'}
           value="progress"
           textAlign={'center'}
-          borderRightWidth={1}
-          borderBottomWidth={0.8}
-          borderColor={'black'}
-          color="gray.500"
+          color="gray.400"
+          borderWidth={1}
+          borderColor={'gray.400'}
+          borderBottomColor={'black'}
+          borderRightColor={'black'}
+          rounded={'none'}
+          mr={0.2}
           _selected={{
             color: 'black',
-            borderBottomWidth: 2,
-            borderBottomColor: 'black'
+            borderWidth: 1,
+            borderColor: 'black',
+            borderBottom: 'none'
           }}
         >
           Progress
@@ -46,23 +49,40 @@ const TabsUI: React.FC<Props> = ({
           bg={'white'}
           w={'50%'}
           value="result"
-          borderRightWidth={0.8}
-          borderBottomWidth={0.8}
-          borderColor={'black'}
-          color="gray.500"
+          borderBottomWidth={1}
+          brderBottomColor={'black'}
+          color="gray.400"
+          borderWidth={1}
+          borderColor={'gray.300'}
+          borderBottomColor={'black'}
+          rounded={'none'}
           _selected={{
             color: 'black',
-            borderBottomWidth: 2,
-            borderBottomColor: 'black'
+            borderWidth: 1,
+            borderColor: 'black',
+            borderBottom: 'none',
+            borderLeft: 'none'
           }}
         >
           Result
         </Tabs.Trigger>
       </Tabs.List>
-      <Tabs.Content p={0} value="progress">
+      <Tabs.Content
+        p={0}
+        value="progress"
+        _focus={{
+          outline: 'none'
+        }}
+      >
         <Output>{progressOutput}</Output>
       </Tabs.Content>
-      <Tabs.Content p={0} value="result">
+      <Tabs.Content
+        p={0}
+        value="result"
+        _focus={{
+          outline: 'none'
+        }}
+      >
         <Output>{resultOutput}</Output>
       </Tabs.Content>
     </Tabs.Root>

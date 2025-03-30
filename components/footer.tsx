@@ -21,6 +21,9 @@ const Footer: React.FC = () => {
         color="tomato"
         style={{ textDecoration: 'none' }}
         target="_blankhttps://scribehow.com/scribe-ai"
+        _focus={{
+          outline: 'none'
+        }}
       >
         Ali
       </Link>
