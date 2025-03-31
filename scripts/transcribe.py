@@ -1,13 +1,13 @@
 import os
 import openai
-from dotenv import load_dotenv
 import sys
-
+from dotenv import load_dotenv
 load_dotenv()
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
+os.getenv('OPENAI_API_KEY')
+
 audio_filename = sys.argv[1]
-audio_file_path = os.path.join(os.getcwd(), 'tmp', audio_filename)
+audio_file_path = os.path.join(os.getcwd(), 'tmp', audio_filename) + ".m4a"
 
 audio_file = open(audio_file_path, 'rb')
 transcript = openai.audio.transcriptions.create(
