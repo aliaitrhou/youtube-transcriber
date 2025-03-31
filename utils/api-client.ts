@@ -6,24 +6,21 @@ type ProgressCallback = (output: string) => void;
 
 export async function processVideo(
   videoId: string,
+  language: string = 'English',
   callback: ProgressCallback
 ): Promise<false | string> {
-  callback('------------------------\n');
   callback('Downloading audio...\n');
-  callback('------------------------\n');
   await downloadAudio(videoId, callback);
 
+  console.log('langauge is :', language);
+
   callback('\nTranscribing audio. It takes a while...\n');
-  callback('------------------------\n');
   const srt = await transcribe(videoId, callback);
   if (srt) {
-    callback('------------------------\n');
+    callback('\n');
     callback('\nTranslating text...\n');
-    callback('------------------------\n');
-    const result = await translate(srt, callback);
-    callback('------------------------\n');
+    const result = await translate(srt, language, callback);
     callback('\nDone!\n');
-    callback('------------------------\n');
     return result;
   }
 
@@ -64,8 +61,12 @@ export async function transcribe(
   }
 }
 
-export async function translate(srtData: string, onProgress: ProgressCallback) {
-  const res = await fetch(`/api/translate`, {
+export async function translate(
+  srtData: string,
+  language: string,
+  onProgress: ProgressCallback
+) {
+  const res = await fetch(`/api/translate?lang=${language}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain; charset=utf-8'

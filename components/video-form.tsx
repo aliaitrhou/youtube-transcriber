@@ -1,5 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Button, Field, HStack, Input, NativeSelect } from '@chakra-ui/react';
+import {
+  Button,
+  Field,
+  HStack,
+  Input,
+  NativeSelect,
+  Spinner,
+  Text
+} from '@chakra-ui/react';
 
 type Props = {
   onSubmit: (videoUrl: string, lang: string) => void;
@@ -81,6 +89,7 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
               rounded={'none'}
               borderWidth={1}
               borderColor={'black'}
+              color={language ? 'black' : 'gray.500'}
               onChange={handleSelectElementChange}
             >
               <option selected disabled>
@@ -107,7 +116,14 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
             fontFamily={'sora'}
             fontSize={13}
           >
-            {isProcessing ? 'Processing...' : 'Start Processing'}
+            {isProcessing ? (
+              <HStack gap={1}>
+                <Spinner size={'xs'} color="gray.300" />
+                <Text>Processing...</Text>
+              </HStack>
+            ) : (
+              'Start Processing'
+            )}
           </Button>
         </HStack>
       </Field.Root>

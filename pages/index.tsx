@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 import { extractVideoIdFromUrl, processVideo } from '../utils/api-client';
 import Footer from '../components/footer';
-import { Container, Heading, Stack } from '@chakra-ui/react';
+import { Box, Container, Heading, Stack } from '@chakra-ui/react';
 import Tabs from '../components/tabs';
 
 export default function Home() {
@@ -18,11 +18,11 @@ export default function Home() {
     if (typeof videoId === 'string') {
       setResultTranscript('');
       setProcessing(true);
-      const transcriptInArabic = await processVideo(videoId, message => {
+      const transcript = await processVideo(videoId, language, message => {
         setProgressOutput(prev => prev + message);
       });
-      if (transcriptInArabic) {
-        setResultTranscript(transcriptInArabic);
+      if (transcript) {
+        setResultTranscript(transcript);
       }
       setProcessing(false);
       setActiveTab('result');
@@ -34,9 +34,9 @@ export default function Home() {
   return (
     <Container h={'100dvh'} maxW={'4xl'} p={[2, 4, 6]} gap={0} bg="tomato.400">
       <Head>
-        <title></title>
+        <title>Trascript & Translate Videos</title>
       </Head>
-      <Stack h={'full'} justifyContent={'center'} alignItems={'center'}>
+      <Stack h={'full'} justifyContent={'center'} alignItems={'center'} gap={0}>
         <Stack
           w={'full'}
           fontFamily={'Inconsolata'}
@@ -44,19 +44,25 @@ export default function Home() {
           marginX="auto"
           paddingX={3}
         >
-          <Heading
-            as="h1"
-            maxW={'2xl'}
-            mx={'auto'}
-            fontFamily={'sora'}
-            color="red.500"
-            textAlign={'center'}
-            fontSize={[24, 28, 35]}
-            lineHeight={1.1}
-            mb={6}
+          <Box
+            borderLeftWidth={8}
+            borderLeftColor={'tomato'}
+            py={2}
+            px={4}
+            mb={[2, 3, 5]}
           >
-            Translate & Trascript any video to any language within Seconds!
-          </Heading>
+            <Heading
+              as="h1"
+              fontFamily={'sora'}
+              color={'tomato'}
+              textAlign={'start'}
+              fontSize={[16, 20, 25]}
+              lineHeight={1.1}
+            >
+              Trascript & Translate any Youtube video to any language within
+              seconds!
+            </Heading>
+          </Box>
           <VideoForm
             isProcessing={isProcessing}
             onSubmit={handleStartProcessing}

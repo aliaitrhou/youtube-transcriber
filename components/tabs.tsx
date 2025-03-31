@@ -60,8 +60,8 @@ const TabsUI: React.FC<Props> = ({
             color: 'black',
             borderWidth: 1,
             borderColor: 'black',
-            borderBottom: 'none',
-            borderLeft: 'none'
+            borderLeft: 'none',
+            borderBottom: 'none'
           }}
         >
           Result
