@@ -9,11 +9,9 @@
   "dependencies": {
     "@chakra-ui/react": "^3.13.0",
     "@emotion/react": "^11.14.0",
-    "@hookform/resolvers": "^5.0.0",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "zod": "^3.24.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.6",

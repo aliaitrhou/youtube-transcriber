@@ -10,7 +10,6 @@ import {
   Spinner,
   Text
 } from '@chakra-ui/react';
-import { z } from 'zod';
 
 type Props = {
   onSubmit: (videoUrl: string, lang: string) => void;
@@ -48,22 +47,9 @@ const getLanguages = () => {
   return languages;
 };
 
-const formSchema = z.object({
-  ytVideoUrl: z
-    .string()
-    .regex(/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]+$/, {
-      message: 'ViedoUrl is required!'
-    }),
-  language: z.string().min(1, { message: 'Language is required' })
-});
-
 const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
   const [language, setLanguage] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
-  const [missingData, setMissingData] = useState({
-    url: '',
-    lang: ''
-  });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -73,20 +59,11 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
 
-    // Validate input using Zod
-    const result = formSchema.safeParse({
-      ytVideoUrl: videoUrl,
-      language: language
-    });
-
-    if (!result.success) {
-      setMissingData({
-        url: result.error.format().ytVideoUrl?._errors?.[0] || '',
-        lang: result.error.format().language?._errors?.[0] || ''
-      });
+    if (videoUrl && language) {
+      onSubmit(videoUrl, language);
+    } else {
       return;
     }
-    onSubmit(videoUrl, language);
   };
 
   const langs = createListCollection({
@@ -95,22 +72,21 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field.Root invalid={Boolean(missingData.url)} mb={2}>
+      <Field.Root mb={2}>
         <HStack mb={-1} justifyContent={'space-between'} w="full">
           <Field.Label fontSize={['xs', 'sm']}>Video URL</Field.Label>
-          <Field.ErrorText>{missingData.url}</Field.ErrorText>
         </HStack>
         <Input
+          required
           onChange={handleInputChange}
           rounded={'none'}
-          borderWidth={missingData.url ? 2 : 1}
-          borderColor={missingData.url ? 'red.400' : 'black'}
+          borderWidth={1}
+          borderColor={'black'}
           name="videoUrl"
           placeholder="https://youtube.com/watch?v="
         />
       </Field.Root>
-      <Field.Root w="full" invalid={Boolean(missingData.lang)}>
-        <Field.ErrorText mb={-1}>{missingData.lang}</Field.ErrorText>
+      <Field.Root w="full">
         <HStack flexDir={['column', 'row']} w="full">
           <Select.Root
             w={['full', '1/2']}
@@ -124,8 +100,8 @@ const VideoForm: React.FC<Props> = ({ onSubmit, isProcessing }) => {
                 rounded={'none'}
                 fontSize={16}
                 py={'3px'}
-                borderWidth={missingData.lang ? 2 : 1}
-                borderColor={missingData.lang ? 'red.400' : 'black'}
+                borderWidth={1}
+                borderColor={'black'}
               >
                 <Select.ValueText
                   placeholder={language === '' ? 'Select langauge' : language}
